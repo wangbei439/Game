@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://b1jfrkns3qbrc"]
+
+[ext_resource type="Script" uid="uid://dhadpj0pjqh37" path="res://resources/data/equipment_data.gd" id="1_ifhod"]
+
+[resource]
+script = ExtResource("1_ifhod")
+name = "铁剑"
+attack = 5
+metadata/_custom_type_script = "uid://dhadpj0pjqh37"

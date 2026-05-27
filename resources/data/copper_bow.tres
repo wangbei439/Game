@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://cbovlbtovqvgh"]
+
+[ext_resource type="Script" uid="uid://dhadpj0pjqh37" path="res://resources/data/equipment_data.gd" id="1_dw6cc"]
+
+[resource]
+script = ExtResource("1_dw6cc")
+name = "铜弓"
+speed_bonus = 0.5
+metadata/_custom_type_script = "uid://dhadpj0pjqh37"

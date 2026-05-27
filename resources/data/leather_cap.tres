@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EquipmentData" format=3 uid="uid://cctgo2kamh8du"]
+
+[ext_resource type="Script" uid="uid://dhadpj0pjqh37" path="res://resources/data/equipment_data.gd" id="1_oiux8"]
+
+[resource]
+script = ExtResource("1_oiux8")
+name = "皮帽"
+slot = 1
+defense = 2
+metadata/_custom_type_script = "uid://dhadpj0pjqh37"

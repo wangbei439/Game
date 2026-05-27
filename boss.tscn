@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://evxkxnhyqxwk"]
+
+[ext_resource type="Script" uid="uid://b5mn6n3rfuifj" path="res://scripts/boss.gd" id="1_0bnu1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xxrv"]
+albedo_color = Color(0.6012614, 2.0214916e-06, 4.3317675e-07, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_skx2t"]
+material = SubResource("StandardMaterial3D_6xxrv")
+size = Vector3(1, 2.5, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lnbgr"]
+radius = 0.8
+height = 2.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o1i15"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_we8h1"]
+material = SubResource("StandardMaterial3D_o1i15")
+size = Vector2(2, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvofc"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ef0k6"]
+material = SubResource("StandardMaterial3D_kvofc")
+size = Vector2(2, 0.15)
+
+[node name="Boss" type="CharacterBody3D" unique_id=1648253051]
+script = ExtResource("1_0bnu1")
+
+[node name="body" type="MeshInstance3D" parent="." unique_id=784719321]
+mesh = SubResource("BoxMesh_skx2t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1953139422]
+shape = SubResource("CapsuleShape3D_lnbgr")
+
+[node name="dmg_text" type="Label3D" parent="." unique_id=468903047]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+billboard = 2
+font_size = 40
+
+[node name="hp_bar" type="Node3D" parent="." unique_id=975115383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, 0)
+
+[node name="hp_bg" type="MeshInstance3D" parent="hp_bar" unique_id=1353625549]
+cast_shadow = 0
+mesh = SubResource("QuadMesh_we8h1")
+
+[node name="hp_fill" type="MeshInstance3D" parent="hp_bar" unique_id=151751803]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_ef0k6")
