@@ -1,0 +1,14 @@
+# Godot 4+ 特定忽略
+.godot/
+.android/          # 如果你有 android/ 目录，这样写；原写法 /android/ 也可，效果一样
+.import/
+*.import
+*.translation
+*.tmp
+
+# 导出配置（若包含密钥务必取消下一行注释，或确保仓库私有）
+# export_presets.cfg
+
+# 系统杂项
+Thumbs.db
+.DS_Store
