@@ -1,21 +1,12 @@
 [gd_scene format=3 uid="uid://cj8vqiykkl8oh"]
 
 [ext_resource type="Script" uid="uid://cny25xqvk7am0" path="res://scripts/dummy.gd" id="1_gtj52"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmspm"]
-albedo_color = Color(0.6655982, 0.96996623, 0.8002453, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_0umox"]
-material = SubResource("StandardMaterial3D_xmspm")
-size = Vector3(0.8, 1.6, 0.4)
+[ext_resource type="Texture2D" uid="uid://bvdl6wtj4wf4t" path="res://assets/scenes/dark_forest/processed_image5.png" id="2_xmspm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1324b"]
 
 [node name="Dummy" type="CharacterBody3D" unique_id=560607382]
 script = ExtResource("1_gtj52")
-
-[node name="body" type="MeshInstance3D" parent="." unique_id=1857007050]
-mesh = SubResource("BoxMesh_0umox")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=126144881]
 shape = SubResource("CapsuleShape3D_1324b")
@@ -25,3 +16,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 billboard = 2
 modulate = Color(1, 0, 0, 1)
 outline_size = 8
+
+[node name="body" type="Sprite3D" parent="." unique_id=1577019506]
+billboard = 2
+texture_filter = 0
+texture = ExtResource("2_xmspm")

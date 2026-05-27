@@ -13,7 +13,7 @@ var patrol_radius = 5.0
 var player = null
 
 func _ready():
-	original_color = $body.mesh.surface_get_material(0).albedo_color
+	original_color = $body.modulate
 	patrol_center = position
 	pick_new_patrol_target()
 
@@ -101,9 +101,9 @@ func face_direction(dir):
 func take_damage(amount):
 	hp -= amount
 	show_damage_number(amount)
-	$body.mesh.surface_get_material(0).albedo_color = Color.WHITE
+	$body.modulate = Color.WHITE
 	await get_tree().create_timer(0.1).timeout
-	$body.mesh.surface_get_material(0).albedo_color = original_color
+	$body.modulate = original_color
 	# 被打后立刻追击玩家
 	state = "chase"
 	if hp <= 0:

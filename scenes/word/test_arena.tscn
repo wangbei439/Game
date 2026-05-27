@@ -1,16 +1,22 @@
 [gd_scene format=3 uid="uid://bgkgmjxil4an8"]
 
+[ext_resource type="Texture2D" uid="uid://medk45k4wrpb" path="res://assets/scenes/dark_forest/processed_image3.png" id="1_aw6sy"]
 [ext_resource type="Script" uid="uid://dd0fm05eqb3u3" path="res://scripts/player/player_move.gd" id="1_doyng"]
-[ext_resource type="Texture2D" uid="uid://cxk23uaydvjqb" path="res://icon.svg" id="2_6xj7d"]
 [ext_resource type="PackedScene" uid="uid://cj8vqiykkl8oh" path="res://dummy.tscn" id="3_pl3gt"]
+[ext_resource type="Texture2D" uid="uid://cm54tska2hjiy" path="res://assets/scenes/Gemini_Generated_Image_6zsrpn6zsrpn6zsr_chroma.png" id="3_rmscs"]
 [ext_resource type="PackedScene" uid="uid://evxkxnhyqxwk" path="res://boss.tscn" id="4_qr8j1"]
 [ext_resource type="PackedScene" uid="uid://bf4m1jyywyoxp" path="res://inventory_ui.tscn" id="5_4uc7i"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6xj7d"]
 size = Vector3(30, 0.2, 20)
 
-[sub_resource type="BoxMesh" id="BoxMesh_pl3gt"]
-size = Vector3(30, 0.2, 20)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_72slg"]
+albedo_texture = ExtResource("1_aw6sy")
+uv1_scale = Vector3(10, 10, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_r3wux"]
+material = SubResource("StandardMaterial3D_72slg")
+size = Vector2(30, 20)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qr8j1"]
 albedo_color = Color(0.7977378, 0.7977378, 0.7977378, 1)
@@ -38,6 +44,53 @@ albedo_color = Color(1, 0, 0, 1)
 material = SubResource("StandardMaterial3D_4uc7i")
 size = Vector2(1.2, 0.12)
 
+[sub_resource type="QuadMesh" id="QuadMesh_lpns4"]
+size = Vector2(40, 20)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0g447"]
+load_path = "res://.godot/imported/processed_image_far.png-8a754c4f8321b9cb9f5b85cf2529a32d.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bmtio"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("CompressedTexture2D_0g447")
+
+[sub_resource type="QuadMesh" id="QuadMesh_x6d36"]
+size = Vector2(40, 20)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lpns4"]
+load_path = "res://.godot/imported/processed_image_mid.png-0a7f351aa8ac3a09790b267e34161dba.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hf0wy"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("CompressedTexture2D_lpns4")
+
+[sub_resource type="QuadMesh" id="QuadMesh_egk8y"]
+size = Vector2(40, 20)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bmtio"]
+load_path = "res://.godot/imported/processed_image_near.png-39d4beb56ee57b86268811abe4d44140.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4k6cu"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("CompressedTexture2D_bmtio")
+
+[sub_resource type="Environment" id="Environment_x6d36"]
+ambient_light_color = Color(0.48452926, 0.5370987, 0.6651851, 1)
+ambient_light_energy = 0.4
+glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.58383155, 0.6651851, 0.58383155, 1)
+fog_density = 1.0
+fog_depth_begin = 15.0
+fog_depth_end = 40.0
+
 [node name="TestArena" type="Node3D" unique_id=2088639616]
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=1551347842]
@@ -46,12 +99,14 @@ size = Vector2(1.2, 0.12)
 shape = SubResource("BoxShape3D_6xj7d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1970050617]
-mesh = SubResource("BoxMesh_pl3gt")
+mesh = SubResource("PlaneMesh_r3wux")
 surface_material_override/0 = SubResource("StandardMaterial3D_qr8j1")
 
 [node name="MainCamera" type="Camera3D" parent="." unique_id=159107666]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 12, 12)
+transform = Transform3D(0.70710677, 0.49999994, -0.49999994, 0, 0.7071067, 0.7071067, 0.70710677, -0.49999994, 0.49999994, 0, 12, 12)
+projection = 1
 fov = 50.0
+size = 10.0
 
 [node name="SunLight" type="DirectionalLight3D" parent="." unique_id=1082889273]
 transform = Transform3D(0.8660254, -0.43301272, 0.24999999, 0, 0.49999997, 0.86602545, -0.5, -0.75, 0.43301266, 0, 0, 0)
@@ -63,9 +118,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_doyng")
 
 [node name="sprite" type="Sprite3D" parent="Player" unique_id=1753522114]
+offset = Vector2(0, -0.5)
+pixel_size = 0.02
 billboard = 2
 texture_filter = 0
-texture = ExtResource("2_6xj7d")
+texture = ExtResource("3_rmscs")
+hframes = 8
+vframes = 8
 
 [node name="collision" type="CollisionShape3D" parent="Player" unique_id=1131387344]
 shape = SubResource("CapsuleShape3D_4uc7i")
@@ -98,5 +157,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9795762, 1.0216234)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -8)
 
 [node name="InventoryUI" parent="." unique_id=1832050262 instance=ExtResource("5_4uc7i")]
+
+[node name="Backgrounds" type="Node3D" parent="." unique_id=763174544]
+
+[node name="FarPlane" type="MeshInstance3D" parent="Backgrounds" unique_id=1009226187]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -20)
+mesh = SubResource("QuadMesh_lpns4")
+surface_material_override/0 = SubResource("StandardMaterial3D_bmtio")
+
+[node name="MidPlane" type="MeshInstance3D" parent="Backgrounds" unique_id=59154006]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -10)
+mesh = SubResource("QuadMesh_x6d36")
+surface_material_override/0 = SubResource("StandardMaterial3D_hf0wy")
+
+[node name="NearPlane" type="MeshInstance3D" parent="Backgrounds" unique_id=429270857]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 3)
+visible = false
+mesh = SubResource("QuadMesh_egk8y")
+surface_material_override/0 = SubResource("StandardMaterial3D_4k6cu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1851497746]
+environment = SubResource("Environment_x6d36")
 
 [connection signal="body_entered" from="Player/hitbox" to="Player" method="_on_hitbox_body_entered"]

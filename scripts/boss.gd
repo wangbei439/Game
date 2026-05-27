@@ -14,7 +14,7 @@ var original_color
 var phase_shifted = false
 
 func _ready():
-	original_color = $body.mesh.surface_get_material(0).albedo_color
+	original_color = $body.modulate
 
 func _physics_process(delta):
 	if hp <= 0:
@@ -110,7 +110,7 @@ func enter_phase_2():
 	phase = 2
 	phase_shifted = true
 	chase_speed = 6.0
-	$body.mesh.surface_get_material(0).albedo_color = Color(1.0, 0.3, 0.0)
+	$body.modulate = Color(1.0, 0.3, 0.0)
 	original_color = Color(1.0, 0.3, 0.0)
 	# 阶段转换时短暂停顿
 	await get_tree().create_timer(0.5).timeout
@@ -120,15 +120,15 @@ func enter_phase_3():
 	phase = 3
 	phase_shifted = true
 	chase_speed = 8.0
-	$body.mesh.surface_get_material(0).albedo_color = Color(0.5, 0.0, 0.0)
+	$body.modulate = Color(0.5, 0.0, 0.0)
 	original_color = Color(0.5, 0.0, 0.0)
 	await get_tree().create_timer(0.5).timeout
 	phase_shifted = false
 
 func flash_body():
-	$body.mesh.surface_get_material(0).albedo_color = Color.WHITE
+	$body.modulate = Color.WHITE
 	await get_tree().create_timer(0.1).timeout
-	$body.mesh.surface_get_material(0).albedo_color = original_color
+	$body.modulate = original_color
 
 func update_hp_bar():
 	var ratio = float(hp) / float(max_hp)
