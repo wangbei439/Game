@@ -2,10 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://medk45k4wrpb" path="res://assets/scenes/dark_forest/processed_image3.png" id="1_aw6sy"]
 [ext_resource type="Script" uid="uid://dd0fm05eqb3u3" path="res://scripts/player/player_move.gd" id="1_doyng"]
+[ext_resource type="Texture2D" uid="uid://n8pxdp1w4aq1" path="res://assets/scenes/Gemini_Generated_Image_83ngsd83ngsd83ng.png" id="3_aw6sy"]
 [ext_resource type="PackedScene" uid="uid://cj8vqiykkl8oh" path="res://dummy.tscn" id="3_pl3gt"]
-[ext_resource type="Texture2D" uid="uid://cm54tska2hjiy" path="res://assets/scenes/Gemini_Generated_Image_6zsrpn6zsrpn6zsr_chroma.png" id="3_rmscs"]
 [ext_resource type="PackedScene" uid="uid://evxkxnhyqxwk" path="res://boss.tscn" id="4_qr8j1"]
 [ext_resource type="PackedScene" uid="uid://bf4m1jyywyoxp" path="res://inventory_ui.tscn" id="5_4uc7i"]
+[ext_resource type="Script" uid="uid://cl2s7rlu4s7ve" path="res://scripts/world/world_manager.gd" id="7_bmtio"]
+[ext_resource type="Script" uid="uid://dmjde0uqadrd0" path="res://scripts/quest/quest_manager.gd" id="8_x6d36"]
+[ext_resource type="Script" uid="uid://bylm0ist81378" path="res://scripts/world/poi.gd" id="9_hf0wy"]
+[ext_resource type="Script" uid="uid://dkthsob2q256o" path="res://scripts/world/harvest_node.gd" id="10_egk8y"]
+[ext_resource type="Script" uid="uid://cpwehlei6rf2h" path="res://scripts/world/teleport_point.gd" id="11_4k6cu"]
+[ext_resource type="Script" uid="uid://i2vouruxp214" path="res://scripts/world/spawn_zone.gd" id="12_xq3lr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6xj7d"]
 size = Vector3(30, 0.2, 20)
@@ -24,6 +30,33 @@ albedo_color = Color(0.7977378, 0.7977378, 0.7977378, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4uc7i"]
 radius = 0.4
 height = 1.6
+
+[sub_resource type="Animation" id="Animation_rmscs"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_72slg"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+step = 0.083
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083, 0.166, 0.24899998, 0.332, 0.415),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 3, 4, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r3wux"]
+_data = {
+&"RESET": SubResource("Animation_rmscs"),
+&"idle": SubResource("Animation_72slg")
+}
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qr8j1"]
 size = Vector3(4, 3, 4)
@@ -91,6 +124,97 @@ fog_density = 1.0
 fog_depth_begin = 15.0
 fog_depth_end = 40.0
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_84gcd"]
+radius = 1.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dg8vx"]
+albedo_color = Color(0.4, 0.9, 0.45, 1)
+emission_enabled = true
+emission = Color(0.4, 0.9, 0.45, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_mce4w"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_aiy0d"]
+radius = 1.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8sfk"]
+albedo_color = Color(0.25, 0.85, 0.7, 1)
+emission_enabled = true
+emission = Color(0.25, 0.85, 0.7, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_5afnp"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u8jig"]
+radius = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xjgo1"]
+albedo_color = Color(0.8, 0.25, 1, 1)
+emission_enabled = true
+emission = Color(0.8, 0.25, 1, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_4lhrr"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mecpq"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ltq8"]
+albedo_color = Color(0.95, 0.55, 0.25, 1)
+emission_enabled = true
+emission = Color(0.95, 0.55, 0.25, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_cr161"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0nljv"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sywtg"]
+albedo_color = Color(0.95, 0.55, 0.25, 1)
+emission_enabled = true
+emission = Color(0.95, 0.55, 0.25, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_3y44c"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_arv25"]
+radius = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gl15l"]
+albedo_color = Color(0.35, 0.7, 1, 1)
+emission_enabled = true
+emission = Color(0.35, 0.7, 1, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_odx4p"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ksq0c"]
+radius = 2.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tptp"]
+albedo_color = Color(1, 0.25, 0.25, 1)
+emission_enabled = true
+emission = Color(1, 0.25, 0.25, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_pb4pq"]
+radius = 0.25
+height = 0.5
+
 [node name="TestArena" type="Node3D" unique_id=2088639616]
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=1551347842]
@@ -103,9 +227,8 @@ mesh = SubResource("PlaneMesh_r3wux")
 surface_material_override/0 = SubResource("StandardMaterial3D_qr8j1")
 
 [node name="MainCamera" type="Camera3D" parent="." unique_id=159107666]
-transform = Transform3D(0.70710677, 0.49999994, -0.49999994, 0, 0.7071067, 0.7071067, 0.70710677, -0.49999994, 0.49999994, 0, 12, 12)
-projection = 1
-fov = 50.0
+transform = Transform3D(0.70710677, 0.49999994, -0.49999994, 0, 0.7071067, 0.7071067, 0.70710677, -0.49999994, 0.49999994, 0, 14, 14)
+fov = 40.0
 size = 10.0
 
 [node name="SunLight" type="DirectionalLight3D" parent="." unique_id=1082889273]
@@ -117,19 +240,21 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_doyng")
 
-[node name="sprite" type="Sprite3D" parent="Player" unique_id=1753522114]
+[node name="body" type="Sprite3D" parent="Player" unique_id=1753522114]
 offset = Vector2(0, -0.5)
 pixel_size = 0.02
 billboard = 2
 texture_filter = 0
-texture = ExtResource("3_rmscs")
+texture = ExtResource("3_aw6sy")
 hframes = 8
 vframes = 8
+frame = 4
 
 [node name="collision" type="CollisionShape3D" parent="Player" unique_id=1131387344]
 shape = SubResource("CapsuleShape3D_4uc7i")
 
 [node name="animator" type="AnimationPlayer" parent="Player" unique_id=1825477435]
+libraries/ = SubResource("AnimationLibrary_r3wux")
 
 [node name="hitbox" type="Area3D" parent="Player" unique_id=2032834156]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1)
@@ -151,10 +276,11 @@ cast_shadow = 0
 mesh = SubResource("QuadMesh_aw6sy")
 
 [node name="Dummy" parent="." unique_id=560607382 instance=ExtResource("3_pl3gt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9795762, 1.0216234)
+transform = Transform3D(0.23196715, 0, 0, 0, 0.23196715, 0, 0, 0, 0.23196715, 0, 0.9795762, 1.0216234)
+visible = false
 
 [node name="Boss" parent="." unique_id=1648253051 instance=ExtResource("4_qr8j1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -8)
+transform = Transform3D(0.36539364, 0, 0, 0, 0.36539364, 0, 0, 0, 0.36539364, 0, 1.3, -8)
 
 [node name="InventoryUI" parent="." unique_id=1832050262 instance=ExtResource("5_4uc7i")]
 
@@ -178,5 +304,104 @@ surface_material_override/0 = SubResource("StandardMaterial3D_4k6cu")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1851497746]
 environment = SubResource("Environment_x6d36")
+
+[node name="WorldManager" type="Node" parent="." unique_id=1625848163]
+script = ExtResource("7_bmtio")
+
+[node name="QuestManager" type="Node" parent="." unique_id=498595886]
+script = ExtResource("8_x6d36")
+
+[node name="OpenWorldMarkers" type="Node3D" parent="." unique_id=607274326]
+
+[node name="AbandonedCampPOI" type="Area3D" parent="OpenWorldMarkers" unique_id=1843252114]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 2)
+script = ExtResource("9_hf0wy")
+poi_id = "abandoned_camp"
+display_name = "Abandoned Camp"
+quest_event_id = "reach_abandoned_camp"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OpenWorldMarkers/AbandonedCampPOI" unique_id=1331112425]
+shape = SubResource("SphereShape3D_84gcd")
+
+[node name="Marker" type="MeshInstance3D" parent="OpenWorldMarkers/AbandonedCampPOI" unique_id=188112413]
+material_override = SubResource("StandardMaterial3D_dg8vx")
+mesh = SubResource("SphereMesh_mce4w")
+
+[node name="SporeGrovePOI" type="Area3D" parent="OpenWorldMarkers" unique_id=156786977]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 4)
+script = ExtResource("9_hf0wy")
+poi_id = "spore_grove"
+display_name = "Spore Grove"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OpenWorldMarkers/SporeGrovePOI" unique_id=563161404]
+shape = SubResource("SphereShape3D_aiy0d")
+
+[node name="Marker" type="MeshInstance3D" parent="OpenWorldMarkers/SporeGrovePOI" unique_id=1327947493]
+material_override = SubResource("StandardMaterial3D_i8sfk")
+mesh = SubResource("SphereMesh_5afnp")
+
+[node name="CorruptedShrinePOI" type="Area3D" parent="OpenWorldMarkers" unique_id=596547844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
+script = ExtResource("9_hf0wy")
+poi_id = "corrupted_shrine"
+display_name = "Corrupted Shrine"
+quest_event_id = "investigate_corrupted_shrine"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OpenWorldMarkers/CorruptedShrinePOI" unique_id=169876410]
+shape = SubResource("SphereShape3D_u8jig")
+
+[node name="Marker" type="MeshInstance3D" parent="OpenWorldMarkers/CorruptedShrinePOI" unique_id=1908043110]
+material_override = SubResource("StandardMaterial3D_xjgo1")
+mesh = SubResource("SphereMesh_4lhrr")
+
+[node name="SporeCluster1" type="Area3D" parent="OpenWorldMarkers" unique_id=2062879075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 1, 2.8)
+script = ExtResource("10_egk8y")
+harvest_id = "spore_cluster_1"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OpenWorldMarkers/SporeCluster1" unique_id=406238269]
+shape = SubResource("SphereShape3D_mecpq")
+
+[node name="Marker" type="MeshInstance3D" parent="OpenWorldMarkers/SporeCluster1" unique_id=146861094]
+material_override = SubResource("StandardMaterial3D_2ltq8")
+mesh = SubResource("SphereMesh_cr161")
+
+[node name="SporeCluster2" type="Area3D" parent="OpenWorldMarkers" unique_id=518157456]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8, 1, 2.8)
+script = ExtResource("10_egk8y")
+harvest_id = "spore_cluster_2"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OpenWorldMarkers/SporeCluster2" unique_id=973723219]
+shape = SubResource("SphereShape3D_0nljv")
+
+[node name="Marker" type="MeshInstance3D" parent="OpenWorldMarkers/SporeCluster2" unique_id=1307155110]
+material_override = SubResource("StandardMaterial3D_sywtg")
+mesh = SubResource("SphereMesh_3y44c")
+
+[node name="ForestTeleportPoint" type="Area3D" parent="OpenWorldMarkers" unique_id=1332020342]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -3)
+script = ExtResource("11_4k6cu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OpenWorldMarkers/ForestTeleportPoint" unique_id=200493088]
+shape = SubResource("SphereShape3D_arv25")
+
+[node name="Marker" type="MeshInstance3D" parent="OpenWorldMarkers/ForestTeleportPoint" unique_id=784023015]
+material_override = SubResource("StandardMaterial3D_gl15l")
+mesh = SubResource("SphereMesh_odx4p")
+
+[node name="ForestSpawnZone" type="Area3D" parent="OpenWorldMarkers" unique_id=749073499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -1)
+script = ExtResource("12_xq3lr")
+enemy_scene = ExtResource("3_pl3gt")
+max_active = 2
+spawn_interval_seconds = 10.0
+spawn_radius = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OpenWorldMarkers/ForestSpawnZone" unique_id=1032692805]
+shape = SubResource("SphereShape3D_ksq0c")
+
+[node name="Marker" type="MeshInstance3D" parent="OpenWorldMarkers/ForestSpawnZone" unique_id=750719150]
+material_override = SubResource("StandardMaterial3D_5tptp")
+mesh = SubResource("SphereMesh_pb4pq")
 
 [connection signal="body_entered" from="Player/hitbox" to="Player" method="_on_hitbox_body_entered"]
