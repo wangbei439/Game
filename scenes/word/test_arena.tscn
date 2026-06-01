@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dkthsob2q256o" path="res://scripts/world/harvest_node.gd" id="10_egk8y"]
 [ext_resource type="Script" uid="uid://cpwehlei6rf2h" path="res://scripts/world/teleport_point.gd" id="11_4k6cu"]
 [ext_resource type="Script" uid="uid://i2vouruxp214" path="res://scripts/world/spawn_zone.gd" id="12_xq3lr"]
+[ext_resource type="Script" uid="uid://b64adfosxemha" path="res://scripts/ui/quest_hud.gd" id="13_x6d36"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6xj7d"]
 size = Vector3(30, 0.2, 20)
@@ -403,5 +404,50 @@ shape = SubResource("SphereShape3D_ksq0c")
 [node name="Marker" type="MeshInstance3D" parent="OpenWorldMarkers/ForestSpawnZone" unique_id=750719150]
 material_override = SubResource("StandardMaterial3D_5tptp")
 mesh = SubResource("SphereMesh_pb4pq")
+
+[node name="QuestCanvasLayer" type="CanvasLayer" parent="." unique_id=393661749]
+
+[node name="QuestHUD" type="Control" parent="QuestCanvasLayer" unique_id=148245951]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 396.0
+offset_bottom = 132.0
+script = ExtResource("13_x6d36")
+
+[node name="Panel" type="PanelContainer" parent="QuestCanvasLayer/QuestHUD" unique_id=1984292102]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Margin" type="MarginContainer" parent="QuestCanvasLayer/QuestHUD/Panel" unique_id=1982673949]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 10
+
+[node name="Rows" type="VBoxContainer" parent="QuestCanvasLayer/QuestHUD/Panel/Margin" unique_id=1691966022]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TitleLabel" type="Label" parent="QuestCanvasLayer/QuestHUD/Panel/Margin/Rows" unique_id=1630679895]
+layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3
+clip_text = true
+
+[node name="ObjectiveLabel" type="Label" parent="QuestCanvasLayer/QuestHUD/Panel/Margin/Rows" unique_id=1737865156]
+layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3
+clip_text = true
+
+[node name="ProgressLabel" type="Label" parent="QuestCanvasLayer/QuestHUD/Panel/Margin/Rows" unique_id=1769849584]
+layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3
+clip_text = true
 
 [connection signal="body_entered" from="Player/hitbox" to="Player" method="_on_hitbox_body_entered"]
